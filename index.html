@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RBLX HUB | Staff Applications</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0b0f17;
+  color: white;
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+nav {
+  height: 70px;
+  background: #111827;
+  border-bottom: 1px solid #263244;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: #5865f2;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.discord-link {
+  color: white;
+  text-decoration: none;
+  background: #5865f2;
+  padding: 10px 17px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 70px 20px 45px;
+  background:
+    radial-gradient(circle at top, #202a55 0%, #0b0f17 60%);
+}
+
+.badge {
+  display: inline-block;
+  color: #9aa7ff;
+  background: #1b2443;
+  border: 1px solid #5865f2;
+  padding: 7px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 7vw, 58px);
+  margin-bottom: 15px;
+}
+
+.hero h1 span {
+  color: #5865f2;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: auto;
+  color: #9ca3af;
+  line-height: 1.7;
+}
+
+/* MAIN */
+.container {
+  width: 92%;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+}
+
+/* CARDS */
+.card {
+  background: #111827;
+  border: 1px solid #263244;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 22px;
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+/* POSITIONS */
+.positions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.position {
+  background: #0b1220;
+  border: 1px solid #263244;
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.position:hover {
+  border-color: #5865f2;
+  transform: translateY(-2px);
+}
+
+.position.active {
+  border-color: #5865f2;
+  background: #182044;
+}
+
+.position .icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.position h3 {
+  font-size: 15px;
+  margin-bottom: 7px;
+}
+
+.position p {
+  color: #8993a5;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.required {
+  color: #ff6b6b;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  background: #0b1220;
+  color: white;
+  border: 1px solid #303d52;
+  border-radius: 10px;
+  padding: 13px;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #5865f2;
+  box-shadow: 0 0 0 3px rgba(88,101,242,.15);
+}
+
+textarea {
+  min-height: 115px;
+  resize: vertical;
+}
+
+.hint {
+  color: #7f8a9a;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* QUESTIONS */
+#positionQuestions {
+  display: none;
+}
+
+/* CHECKBOX */
+.checkbox {
+  display: flex;
+  gap: 10px;
+  background: #0b1220;
+  border: 1px solid #263244;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.checkbox input {
+  width: auto;
+  margin-top: 3px;
+}
+
+.checkbox label {
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* BUTTON */
+.submit {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #5865f2;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.submit:hover {
+  background: #4752c4;
+}
+
+.submit:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* SUCCESS */
+.success {
+  display: none;
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.success-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.success h2 {
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.success p {
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.reload {
+  margin-top: 25px;
+  display: inline-block;
+  background: #202a55;
+  padding: 12px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  border-top: 1px solid #202b3d;
+  color: #687386;
+  font-size: 13px;
+}
+
+footer strong {
+  color: #8ea0ff;
+}
+
+/* MOBILE */
+@media(max-width:750px) {
+  .positions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:500px) {
+  nav {
+    padding: 0 5%;
+  }
+
+  .positions {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .hero {
+    padding-top: 50px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">RBLX HUB</div>
+
+  <a
+    class="discord-link"
+    href="https://discord.gg/ymekHw8R7j"
+    target="_blank">
+    Join Discord
+  </a>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="badge">STAFF APPLICATIONS</div>
+
+  <h1>
+    Join the <span>RBLX HUB</span> Team
+  </h1>
+
+  <p>
+    Choose a staff position below and complete the application.
+    Applications are reviewed by the RBLX HUB management team.
+  </p>
+
+</section>
+
+
+<main class="container">
+
+<!-- POSITIONS -->
+<section class="card">
+
+  <h2>🎯 Choose a Position</h2>
+
+  <div class="positions">
+
+    <div
+      class="position"
+      data-position="Moderator"
+      onclick="selectPosition('Moderator')">
+
+      <div class="icon">🛡️</div>
+
+      <h3>Moderator</h3>
+
+      <p>
+        Help enforce rules and keep the community safe.
+      </p>
+
+    </div>
+
+
+    <div
+      class="position"
+      data-position="Administrator"
+      onclick="selectPosition('Administrator')">
+
+      <div class="icon">⚙️</div>
+
+      <h3>Administrator</h3>
+
+      <p>
+        Help manage staff, systems and server operations.
+      </p>
+
+    </div>
+
+
+    <div
+      class="position"
+      data-position="Community Helper"
+      onclick="selectPosition('Community Helper')">
+
+      <div class="icon">🤝</div>
+
+      <h3>Community Helper</h3>
+
+      <p>
+        Welcome members and help keep the community active.
+      </p>
+
+    </div>
+
+
+    <div
+      class="position"
+      data-position="Event Host"
+      onclick="selectPosition('Event Host')">
+
+      <div class="icon">🎉</div>
+
+      <h3>Event Host</h3>
+
+      <p>
+        Plan and host fun community events.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- APPLICATION -->
+<section class="card" id="application">
+
+<div id="formContainer">
+
+<h2>📝 Staff Application</h2>
+
+<form id="applicationForm">
+
+<!-- POSITION -->
+<div class="form-group">
+
+<label>
+  Position <span class="required">*</span>
+</label>
+
+<select id="position" required onchange="updateQuestions()">
+
+<option value="">
+Select a position
+</option>
+
+<option value="Moderator">
+🛡️ Moderator
+</option>
+
+<option value="Administrator">
+⚙️ Administrator
+</option>
+
+<option value="Community Helper">
+🤝 Community Helper
+</option>
+
+<option value="Event Host">
+🎉 Event Host
+</option>
+
+</select>
+
+</div>
+
+
+<!-- DISCORD -->
+<div class="form-group">
+
+<label>
+  Discord Username <span class="required">*</span>
+</label>
+
+<input
+  id="discord"
+  type="text"
+  placeholder="Your Discord username"
+  required>
+
+</div>
+
+
+<!-- ROBLOX -->
+<div class="form-group">
+
+<label>
+  Roblox Username <span class="required">*</span>
+</label>
+
+<input
+  id="roblox"
+  type="text"
+  placeholder="Your Roblox username"
+  required>
+
+</div>
+
+
+<!-- AGE -->
+<div class="form-group">
+
+<label>
+  Age <span class="required">*</span>
+</label>
+
+<input
+  id="age"
+  type="number"
+  min="1"
+  max="99"
+  placeholder="Your age"
+  required>
+
+</div>
+
+
+<!-- TIMEZONE -->
+<div class="form-group">
+
+<label>
+  Timezone <span class="required">*</span>
+</label>
+
+<input
+  id="timezone"
+  type="text"
+  placeholder="Example: GMT+8"
+  required>
+
+</div>
+
+
+<!-- COMMON QUESTION -->
+<div class="form-group">
+
+<label>
+  How active can you be? <span class="required">*</span>
+</label>
+
+<select id="activity" required>
+
+<option value="">
+Select an option
+</option>
+
+<option>Less than 1 hour per day</option>
+<option>1–2 hours per day</option>
+<option>2–4 hours per day</option>
+<option>4+ hours per day</option>
+<option>Depends on my schedule</option>
+
+</select>
+
+</div>
+
+
+<!-- DYNAMIC QUESTIONS -->
+<div id="positionQuestions"></div>
+
+
+<!-- EXTRA -->
+<div class="form-group">
+
+<label>
+  Anything else you want us to know?
+</label>
+
+<textarea
+  id="extra"
+  placeholder="Optional..."></textarea>
+
+</div>
+
+
+<!-- AGREEMENT -->
+<div class="form-group">
+
+<div class="checkbox">
+
+<input
+  type="checkbox"
+  id="agree"
+  required>
+
+<label for="agree">
+
+I confirm that the information I provided is truthful
+and understand that submitting an application does not
+guarantee acceptance into the RBLX HUB staff team.
+
+</label>
+
+</div>
+
+</div>
+
+
+<button
+  class="submit"
+  id="submitButton"
+  type="submit">
+
+Submit Application
+
+</button>
+
+</form>
+
+</div>
+
+
+<!-- SUCCESS -->
+<div class="success" id="success">
+
+<div class="success-icon">✅</div>
+
+<h2>Application Submitted!</h2>
+
+<p>
+
+Thank you for applying to the RBLX HUB staff team.
+
+<br>
+
+Your application has been submitted for review.
+
+</p>
+
+<div
+  class="reload"
+  onclick="location.reload()">
+
+Submit Another Application
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+<strong>RBLX HUB</strong>
+— Small Community. Big Energy.
+
+<br><br>
+
+© 2026 RBLX HUB. All rights reserved.
+
+</footer>
+
+
+<script>
+
+/*
+==========================================================
+DISCORD WEBHOOK
+
+IMPORTANT:
+DO NOT expose a real Discord webhook in public GitHub
+Pages code.
+
+For production, send the application through a secure
+backend/serverless function.
+==========================================================
+*/
+
+const DISCORD_WEBHOOK_URL =
+"YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+
+/* QUESTIONS FOR EACH POSITION */
+
+const questions = {
+
+  "Moderator": [
+
+    {
+      id: "motivation",
+      label: "Why do you want to become a Moderator?",
+      placeholder:
+      "Tell us why you want to join the moderation team..."
+    },
+
+    {
+      id: "rulebreaking",
+      label:
+      "What would you do if a member repeatedly broke the rules?",
+      placeholder:
+      "Explain how you would handle the situation..."
+    },
+
+    {
+      id: "conflict",
+      label:
+      "How would you handle an argument between two members?",
+      placeholder:
+      "Explain your approach..."
+    },
+
+    {
+      id: "experience",
+      label:
+      "Do you have previous moderation experience?",
+      placeholder:
+      "Tell us about your previous experience..."
+    }
+
+  ],
+
+
+  "Administrator": [
+
+    {
+      id: "motivation",
+      label:
+      "Why do you want to become an Administrator?",
+      placeholder:
+      "Explain why you are interested in administration..."
+    },
+
+    {
+      id: "management",
+      label:
+      "How would you manage a staff member who is inactive?",
+      placeholder:
+      "Explain what steps you would take..."
+    },
+
+    {
+      id: "decision",
+      label:
+      "How would you make an important decision affecting the server?",
+      placeholder:
+      "Explain your decision-making process..."
+    },
+
+    {
+      id: "experience",
+      label:
+      "Describe your previous leadership or administration experience.",
+      placeholder:
+      "Tell us about your experience..."
+    }
+
+  ],
+
+
+  "Community Helper": [
+
+    {
+      id: "motivation",
+      label:
+      "Why do you want to become a Community Helper?",
+      placeholder:
+      "Explain why you want this role..."
+    },
+
+    {
+      id: "welcome",
+      label:
+      "How would you welcome a new member?",
+      placeholder:
+      "Explain how you would help a new member feel welcome..."
+    },
+
+    {
+      id: "inactive",
+      label:
+      "How would you help make a quiet channel more active?",
+      placeholder:
+      "Give some ideas..."
+    },
+
+    {
+      id: "help",
+      label:
+      "What would you do if a member asked for help?",
+      placeholder:
+      "Explain how you would assist them..."
+    }
+
+  ],
+
+
+  "Event Host": [
+
+    {
+      id: "motivation",
+      label:
+      "Why do you want to become an Event Host?",
+      placeholder:
+      "Explain why you want to host events..."
+    },
+
+    {
+      id: "eventidea",
+      label:
+      "Give us an event idea for RBLX HUB.",
+      placeholder:
+      "Describe an event you would like to host..."
+    },
+
+    {
+      id: "planning",
+      label:
+      "How would you plan and organize an event?",
+      placeholder:
+      "Explain the steps you would take..."
+    },
+
+    {
+      id: "lowattendance",
+      label:
+      "What would you do if very few members joined your event?",
+      placeholder:
+      "Explain how you would respond..."
+    }
+
+  ]
+
+};
+
+
+/* SELECT POSITION */
+
+function selectPosition(position) {
+
+  document.getElementById("position").value =
+  position;
+
+  updateQuestions();
+
+  document.getElementById("application")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+}
+
+
+/* UPDATE QUESTIONS */
+
+function updateQuestions() {
+
+  const position =
+  document.getElementById("position").value;
+
+  const container =
+  document.getElementById("positionQuestions");
+
+  container.innerHTML = "";
+
+  if (!position) {
+
+    container.style.display = "none";
+
+    document.querySelectorAll(".position")
+      .forEach(card => {
+        card.classList.remove("active");
+      });
+
+    return;
+  }
+
+
+  container.style.display = "block";
+
+
+  /* Highlight selected card */
+
+  document.querySelectorAll(".position")
+    .forEach(card => {
+
+      card.classList.remove("active");
+
+      if (
+        card.dataset.position === position
+      ) {
+        card.classList.add("active");
+      }
+
+    });
+
+
+  /* Create questions */
+
+  questions[position].forEach(question => {
+
+    const group =
+    document.createElement("div");
+
+    group.className = "form-group";
+
+    group.innerHTML = `
+
+      <label>
+        ${question.label}
+        <span class="required">*</span>
+      </label>
+
+      <textarea
+        id="question_${question.id}"
+        placeholder="${question.placeholder}"
+        required></textarea>
+
+    `;
+
+    container.appendChild(group);
+
+  });
+
+}
+
+
+/* FORM */
+
+document
+.getElementById("applicationForm")
+.addEventListener("submit", async function(event) {
+
+  event.preventDefault();
+
+
+  const position =
+  document.getElementById("position").value;
+
+  const age =
+  Number(document.getElementById("age").value);
+
+
+  if (!position) {
+
+    alert("Please select a staff position.");
+
+    return;
+
+  }
+
+
+  /* AGE REQUIREMENT */
+
+  if (age < 14) {
+
+    alert(
+      "You must be 14 years old or above to apply."
+    );
+
+    return;
+
+  }
+
+
+  const button =
+  document.getElementById("submitButton");
+
+  button.disabled = true;
+
+  button.textContent =
+  "Submitting...";
+
+
+  /* GET DATA */
+
+  const discord =
+  document.getElementById("discord").value.trim();
+
+  const roblox =
+  document.getElementById("roblox").value.trim();
+
+  const timezone =
+  document.getElementById("timezone").value.trim();
+
+  const activity =
+  document.getElementById("activity").value;
+
+  const extra =
+  document.getElementById("extra").value.trim();
+
+
+  /* BUILD QUESTIONS */
+
+  let fields = [];
+
+
+  questions[position].forEach(question => {
+
+    const answer =
+    document.getElementById(
+      "question_" + question.id
+    ).value.trim();
+
+    fields.push({
+
+      name: question.label,
+
+      value:
+      answer.substring(0, 1024) ||
+      "Not provided"
+
+    });
+
+  });
+
+
+  /* DISCORD EMBED */
+
+  const payload = {
+
+    username:
+    "RBLX HUB Applications",
+
+    embeds: [
+
+      {
+
+        title:
+        "📝 New Staff Application",
+
+        description:
+        `A new **${position}** application has been submitted.`,
+
+        fields: [
+
+          {
+            name: "🎯 Position",
+            value: position,
+            inline: true
+          },
+
+          {
+            name: "💬 Discord",
+            value: discord,
+            inline: true
+          },
+
+          {
+            name: "🎮 Roblox",
+            value: roblox,
+            inline: true
+          },
+
+          {
+            name: "🎂 Age",
+            value: String(age),
+            inline: true
+          },
+
+          {
+            name: "🌍 Timezone",
+            value: timezone,
+            inline: true
+          },
+
+          {
+            name: "⏰ Activity",
+            value: activity,
+            inline: true
+          },
+
+          ...fields,
+
+          {
+            name: "📌 Additional Information",
+            value:
+            extra.substring(0, 1024) ||
+            "None"
+          }
+
+        ],
+
+        footer: {
+          text:
+          "RBLX HUB Staff Applications"
+        },
+
+        timestamp:
+        new Date().toISOString()
+
+      }
+
+    ]
+
+  };
+
+
+  /* DEMO MODE */
+
+  if (
+    DISCORD_WEBHOOK_URL ===
+    "https://discord.com/api/webhooks/1550126612308033578/_1mEEWTREw20jqLK0L7SsLkvJ5QtxA6ccNRMTd6LS160VetXn0peEWUCiHHGRvJGCTaP"
+  ) {
+
+    console.log(
+      "Application:",
+      payload
+    );
+
+    showSuccess();
+
+    return;
+
+  }
+
+
+  /* SEND */
+
+  try {
+
+    const response =
+    await fetch(
+      DISCORD_WEBHOOK_URL,
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+          "application/json"
+        },
+
+        body:
+        JSON.stringify(payload)
+
+      }
+    );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Webhook failed"
+      );
+
+    }
+
+
+    showSuccess();
+
+
+  } catch(error) {
+
+    console.error(error);
+
+    alert(
+      "Failed to submit application. Please try again."
+    );
+
+    button.disabled = false;
+
+    button.textContent =
+    "Submit Application";
+
+  }
+
+});
+
+
+/* SUCCESS */
+
+function showSuccess() {
+
+  document.getElementById(
+    "formContainer"
+  ).style.display = "none";
+
+  document.getElementById(
+    "success"
+  ).style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+</script>
+
+</body>
+  </html>
